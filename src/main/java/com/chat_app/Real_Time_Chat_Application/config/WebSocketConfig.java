@@ -27,6 +27,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 		.setAllowedOrigins("http://localhost:5173")
 		.withSockJS();
 		
+		 registry.addEndpoint("/chat-ws")
+         .setAllowedOriginPatterns("*");
+		
 	}
 	// /chat endpoint par connection apka establish hoga
 }

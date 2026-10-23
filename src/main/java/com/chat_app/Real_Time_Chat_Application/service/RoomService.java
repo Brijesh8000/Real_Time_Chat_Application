@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chat_app.Real_Time_Chat_Application.entity.Room;
+import com.chat_app.Real_Time_Chat_Application.repositry.MessageRepository;
 import com.chat_app.Real_Time_Chat_Application.repositry.RoomRepository;
 
 import java.time.LocalDateTime;
@@ -14,14 +15,18 @@ import javax.management.RuntimeErrorException;
 
 import com.chat_app.Real_Time_Chat_Application.dto.MessageRequestDTO;
 import com.chat_app.Real_Time_Chat_Application.entity.Message;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoomService {
-	
 	private final RoomRepository roomRepo;
+	private final MessageRepository messageRepo;
 
-	RoomService(RoomRepository roomRepo) {
-		this.roomRepo = roomRepo;
+	public RoomService(
+	        RoomRepository roomRepo,
+	        MessageRepository messageRepo) {
+	    this.roomRepo = roomRepo;
+	    this.messageRepo = messageRepo;
 	}
 	
 	public Room findRoom(String roomName) {
@@ -62,25 +67,6 @@ public class RoomService {
 		
 
 	}
-	
-	public Message addMessage(MessageRequestDTO request) {
-		Room room=roomRepo.findByRoomName(request.getRoomName());
 		
-		Message message =new Message();
-		message.setMessage(request.getContent());
-		message.setSender(request.getSender());
-		message.setTimestamp(LocalDateTime.now());
-		if(room!=null) {
-			room.getMessages().add(message);
-			roomRepo.save(room);
-		}
-		else {
-			throw new RuntimeException("Room Not Found");
-		}
-		
-		return message;
-		
-	}
-	
 
 }

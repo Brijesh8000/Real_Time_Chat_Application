@@ -12,4 +12,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer>{
 	
 	public List<Message> findMessageByRoomName(String roomName);
 
+	public Message save(Message message);
+
 }
