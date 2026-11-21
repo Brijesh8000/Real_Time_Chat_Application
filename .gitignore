@@ -13,6 +13,21 @@ target/
 .springBeans
 .sts4-cache
 
+# Eclipse generated files
+/bin/
+/.settings/
+/.classpath
+/.project
+
+# Maven generated files
+/target/
+
+# Environment variables and secrets
+.env
+
+# Log files
+*.log
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
